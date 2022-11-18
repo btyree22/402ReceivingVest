@@ -1,19 +1,21 @@
 #include <Arduino.h>
 #include <rf24g.h>
 #include <RF24.h>
-RF24 radio(51, 53); // CE, CSN
+RF24 radio(32, 34); // CE, CSN
 const byte address[6] = "00001";
 
 int motor_pin_1 = 2;
-int motor_pin_2 = 6;
-int motor_pin_3 = 9;
-int motor_pin_4 = 10;
-int motor_pin_5 = 12;
+int motor_pin_2 = 3;
+int motor_pin_3 = 5;
+int motor_pin_4 = 9;
+int motor_pin_5 = 10;
 int motor_pin_6 = 13;
 
 const int timeout = 10000;       //define timeout of 10 sec
 char menuOption = 0;
 long time0;
+
+float delay_time = 0.000000000001;
 
 boolean motor_state_1 = 0;
 boolean motor_state_2 = 0;
@@ -44,13 +46,16 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   if(radio.available()){
+    //if(radio.available() == true){
+    //  Serial.println("Radio available");
+    //}
     unsigned long data = 0;
     radio.read(&data, sizeof(unsigned long));
     Serial.println(data);
     if(data==1){
       digitalWrite(motor_pin_1, HIGH);
       Serial.print("pin 1");
-      delay(10);
+      delay(delay_time);
       digitalWrite(motor_pin_1, LOW);
     }
     else{
@@ -59,7 +64,7 @@ void loop() {
     
     if(data==2){
       digitalWrite(motor_pin_2, HIGH);
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_2, LOW);
     }
     else{
@@ -68,7 +73,7 @@ void loop() {
     
     if(data==3){
       digitalWrite(motor_pin_3, HIGH);
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_3, LOW);
     }
     else{
@@ -77,7 +82,7 @@ void loop() {
     
     if(data==4){
       digitalWrite(motor_pin_4, HIGH);
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_4, LOW);
     }
     else{
@@ -86,7 +91,7 @@ void loop() {
     
     if(data==5){
       digitalWrite(motor_pin_5, HIGH);
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_5, LOW);
     }
     else{
@@ -95,7 +100,7 @@ void loop() {
 
     if(data==6){
       digitalWrite(motor_pin_6, HIGH);
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_6, LOW);
     }
     else{
@@ -105,7 +110,7 @@ void loop() {
     if(data==7){
       digitalWrite(motor_pin_1, HIGH);
       digitalWrite(motor_pin_2, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_2, LOW);
     }
@@ -117,7 +122,7 @@ void loop() {
     if(data==8){
       digitalWrite(motor_pin_1, HIGH);
       digitalWrite(motor_pin_3, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_3, LOW);
     }
@@ -129,7 +134,7 @@ void loop() {
     if(data==9){
       digitalWrite(motor_pin_1, HIGH);
       digitalWrite(motor_pin_4, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_4, LOW);
     }
@@ -141,7 +146,7 @@ void loop() {
     if(data==10){
       digitalWrite(motor_pin_1, HIGH);
       digitalWrite(motor_pin_5, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_5, LOW);
     }
@@ -153,7 +158,7 @@ void loop() {
     if(data==11){
       digitalWrite(motor_pin_1, HIGH);
       digitalWrite(motor_pin_6, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_6, LOW);
     }
@@ -165,7 +170,7 @@ void loop() {
     if(data==12){
       digitalWrite(motor_pin_2, HIGH);
       digitalWrite(motor_pin_3, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_2, LOW);
       digitalWrite(motor_pin_3, LOW);
     }
@@ -177,7 +182,7 @@ void loop() {
     if(data==13){
       digitalWrite(motor_pin_2, HIGH);
       digitalWrite(motor_pin_4, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_2, LOW);
       digitalWrite(motor_pin_4, LOW);
     }
@@ -189,7 +194,7 @@ void loop() {
     if(data==14){
       digitalWrite(motor_pin_2, HIGH);
       digitalWrite(motor_pin_5, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_2, LOW);
       digitalWrite(motor_pin_5, LOW);
     }
@@ -201,7 +206,7 @@ void loop() {
     if(data==15){
       digitalWrite(motor_pin_2, HIGH);
       digitalWrite(motor_pin_6, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_2, LOW);
       digitalWrite(motor_pin_6, LOW);
     }
@@ -212,7 +217,7 @@ void loop() {
     if(data==16){
       digitalWrite(motor_pin_3, HIGH);
       digitalWrite(motor_pin_4, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_3, LOW);
       digitalWrite(motor_pin_4, LOW);
     }
@@ -224,7 +229,7 @@ void loop() {
     if(data==17){
       digitalWrite(motor_pin_3, HIGH);
       digitalWrite(motor_pin_5, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_3, LOW);
       digitalWrite(motor_pin_5, LOW);
     }
@@ -236,7 +241,7 @@ void loop() {
     if(data==18){
       digitalWrite(motor_pin_3, HIGH);
       digitalWrite(motor_pin_6, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_3, LOW);
       digitalWrite(motor_pin_6, LOW);
     }
@@ -248,7 +253,7 @@ void loop() {
     if(data==19){
       digitalWrite(motor_pin_4, HIGH);
       digitalWrite(motor_pin_5, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_4, LOW);
       digitalWrite(motor_pin_5, LOW);
     }
@@ -260,7 +265,7 @@ void loop() {
     if(data==20){
       digitalWrite(motor_pin_4, HIGH);
       digitalWrite(motor_pin_6, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_4, LOW);
       digitalWrite(motor_pin_6, LOW);
     }
@@ -272,7 +277,7 @@ void loop() {
     if(data==21){
       digitalWrite(motor_pin_5, HIGH);
       digitalWrite(motor_pin_6, HIGH);     
-      delay(50);
+      delay(delay_time);
       digitalWrite(motor_pin_5, LOW);
       digitalWrite(motor_pin_6, LOW);
     }
